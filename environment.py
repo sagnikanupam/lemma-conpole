@@ -397,14 +397,14 @@ def data_eval(environment, data_path, output_path, model_path):
     model = torch.load(model_path, map_location=device)
     model.to(device)
     successes = 0
-    data = pd.read_csv(data_path, header=None)
+    data = pd.read_csv(data_path)
     n_problems = data.shape[0]
     output_df = pd.DataFrame(['Equation Number', 'Equation Output'])
 
     for i in range(n_problems):
         print(f"Equation {i} of {n_problems}: ")
-        if (pd.isna(data.iat[i, 1])):
-            print(str(data.iat[i, 1]))
+        if (pd.isna(data.iloc[i]['Infix_Eq'])):
+            print(str(data.iloc[i]['Infix_Eq']))
             state = State([str(data.iat[i, 1])], ['x = ?'], 0)
             success, history = model.rollout(environment, state, 30, 1, debug=False)
             print(f'[{i}/{n_problems}]: solved?', success)
