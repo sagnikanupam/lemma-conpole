@@ -16,16 +16,12 @@ models/
 output/
 output_ec2/
 eval_output/
-*.json
 !configs/*
 configs/*~
 configs/.*.un~
 configs/.*.swp
-*.org
-*.pkl
 wandb/
 .ipynb_checkpoints/
-*.tar.gz
 
 .emacs.desktop
 
