@@ -402,6 +402,7 @@ def data_eval(environment, data_path, output_path, model_path):
     output_df = pd.DataFrame(['Equation Number', 'Equation Output'])
 
     for i in range(n_problems):
+        print(str(data.iat[i, 0]))
         state = State([str(data.iat[i, 0])], ['x = ?'], 0)
         success, history = model.rollout(environment, state, 30, 1, debug=False)
         print(f'[{i}/{n_problems}]: solved?', success)
