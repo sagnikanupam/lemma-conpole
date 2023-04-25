@@ -399,7 +399,7 @@ def data_eval(environment, data_path, output_path, model_path):
     successes = 0
     data = pd.read_csv(data_path)
     n_problems = data.shape[0]
-    output_df = pd.DataFrame(['Equation Number', 'Equation Output'])
+    output_df = pd.DataFrame({'Equation Number':[], 'Equation Output':[]})
     for i in range(n_problems):
         print(f"Equation {i} of {n_problems}: ")
         print(str(data.iloc[i]['Infix_Eq']))
