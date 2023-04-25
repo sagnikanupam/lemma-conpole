@@ -401,10 +401,12 @@ def data_eval(environment, data_path, output_path, model_path):
     n_problems = data.shape[0]
     output_df = pd.DataFrame(['Equation Number', 'Equation Output'])
 
+    print(data)
+    print(str(data.iloc[i]['Infix_Eq']))
     for i in range(n_problems):
         print(f"Equation {i} of {n_problems}: ")
         if (pd.isna(data.iloc[i]['Infix_Eq'])):
-            print(str(data.iloc[i]['Infix_Eq']))
+            print(str(data.iat[i, 1]))
             state = State([str(data.iat[i, 1])], ['x = ?'], 0)
             success, history = model.rollout(environment, state, 30, 1, debug=False)
             print(f'[{i}/{n_problems}]: solved?', success)
