@@ -402,13 +402,15 @@ def data_eval(environment, data_path, output_path, model_path):
     output_df = pd.DataFrame(['Equation Number', 'Equation Output'])
 
     for i in range(n_problems):
-        print(str(data.iat[i, 0]))
-        state = State([str(data.iat[i, 0])], ['x = ?'], 0)
-        success, history = model.rollout(environment, state, 30, 1, debug=False)
-        print(f'[{i}/{n_problems}]: solved?', success)
-        successes += int(success)
-        eq_output = ''.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
-        output_df.loc[len(output_df.index)] = [str(i), eq_output]
+        print(f"Equation {i} of {n_problems}: ")
+        if (pd.isna(data.iat[i, 1])):
+            print(str(data.iat[i, 1]))
+            state = State([str(data.iat[i, 1])], ['x = ?'], 0)
+            success, history = model.rollout(environment, state, 30, 1, debug=False)
+            print(f'[{i}/{n_problems}]: solved?', success)
+            successes += int(success)
+            eq_output = ''.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
+            output_df.loc[len(output_df.index)] = [str(i), eq_output]
     
     output_df.to_csv(output_path)
     print(f'{successes}/{n_problems}')
