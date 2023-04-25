@@ -409,8 +409,9 @@ def data_eval(environment, data_path, output_path, model_path):
             success, history = model.rollout(environment, state, 30, 1, debug=False)
             print(f'[{i}/{n_problems}]: solved?', success)
             successes += int(success)
-            eq_output = ''.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
-            output_df.loc[len(output_df.index)] = [str(i), eq_output]
+            if success:
+                eq_output = ''.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
+                output_df.loc[len(output_df.index)] = [str(i), eq_output]
     
     output_df.to_csv(output_path)
     print(f'{successes}/{n_problems}')
