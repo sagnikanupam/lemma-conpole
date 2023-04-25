@@ -403,7 +403,7 @@ def data_eval(environment, data_path, output_path, model_path):
     for i in range(n_problems):
         print(f"Equation {i} of {n_problems}: ")
         print(str(data.iloc[i]['Infix_Eq']))
-        if (pd.isna(data.iloc[i]['Infix_Eq'])):
+        if (not pd.isna(data.iloc[i]['Infix_Eq'])):
             print(str(data.iat[i, 1]))
             state = State([str(data.iat[i, 1])], ['x = ?'], 0)
             success, history = model.rollout(environment, state, 30, 1, debug=False)
