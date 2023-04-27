@@ -410,8 +410,11 @@ def data_eval(environment, data_path, output_path, model_path):
             print(f'[{i}/{n_problems}]: solved?', success)
             successes += int(success)
             if success:
-                print(model.recover_solutions(history)[0])
-                eq_output = '> '.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
+                for st in model.recover_solutions(history)[0]:
+                    print(st.facts[-1])
+                #eq_output = '> '.join(map(lambda s: f'{s.facts[-1]} | {s.parent_action and s.parent_action.action}', model.recover_solutions(history)[0]))
+                eq_output = ' | '.join(map(lambda s: f'{s.facts[-1]}'), model.recover_solutions(history)[0])
+                print(eq_output)
                 output_df.loc[len(output_df.index)] = [str(i), eq_output]
     
     output_df.to_csv(output_path)
