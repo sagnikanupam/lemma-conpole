@@ -1,1 +1,5 @@
-python environment.py --rust --data-eval --abstract best-config/A2.pkl,tree_rel_pos --q-function best-config/3-29.pt --domain equations-ct --dataset-filepath data/conpoleDatasetPrefix.csv --dataset-output data/generatedSolutionsTemp.csv
+#Lemma Evaluation
+python environment.py --rust --data-eval --abstract best-config/lemma/A2.pkl,tree_rel_pos --q-function best-config/lemma/3-29.pt --domain equations-ct --dataset-filepath data/conpoleDatasetPrefix.csv --dataset-output outputs/generatedLemmaSolutions.csv
+
+#ConPoLe Evaluation
+python environment.py --rust --data-eval --q-function best-config/conpole/99.pt --domain equations-ct --dataset-filepath data/conpoleDatasetPrefix.csv --dataset-output outputs/generatedConpoleSolutions.csv
